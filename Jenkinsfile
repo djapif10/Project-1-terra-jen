@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                       git branch: 'KbixAug22-winners--branch', url: 'https://github.com/kehbixgit/Augustclass22/'
+                       git branch: 'main', url: 'https://github.com/djapif10/Project-1-terra-jen'
 
           }
         }
