@@ -1,33 +1,23 @@
 pipeline {
     agent any
-
+ 
     stages {
-        stage('Checkout') {
+        stage('checkout') {
             steps {
-                       git branch: 'main', url: 'https://github.com/djapif10/Project-1-terra-jen'
-
-          }
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/djapif10/Project-1-terra-jen']]])
+            }
         }
-        
-        stage ("terraform init") {
+        stage('init') {
             steps {
                 sh ('terraform init') 
             }
         }
-         stage ("terraform Validate") {
+        stage('terraform  action') {
             steps {
-                echo "Terraform action is about to validate code"
-                sh ('terraform validate') 
-           }
+                echo "Terraform action is --> ${action}"
+                sh ('terraform ${action} --auto-approve')
+            }
         }
-         stage ("terraform fmt") {
-            steps {
-               sh ('terraform fmt')
-           }
-        }
-        stage ("terraform Apply") {
-            steps {
-                echo "Terraform action is about to apply"
-                sh ('terraform apply --auto-approve') 
-           }
-        }
+    }
+    
+}
